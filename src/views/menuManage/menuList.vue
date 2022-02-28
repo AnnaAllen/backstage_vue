@@ -31,6 +31,13 @@
 				<span style="margin-left: 10px">￥{{ scope.row.price }}</span>
 			</template>
 		</el-table-column>
+		<el-table-column
+			label="图片"
+			width="180">
+			<template slot-scope="scope">
+				<img style="width:50px;height:50px;" :src="scope.row.menuImage" alt="">
+			</template>
+		</el-table-column>
 		<el-table-column label="操作">
 			<template slot-scope="scope">
 				<el-button

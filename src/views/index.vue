@@ -2,16 +2,28 @@
 	<div class="">
 		<el-container style="border: 1px solid #eee; height: 100vh;">
 			<el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-				<el-menu :default-openeds="['1']" router>
+				<el-menu :default-openeds="['1','2','3']" router>
 					<el-submenu index="1">
 						<template slot="title"><i class="el-icon-message"></i>菜单管理</template>
 						<el-menu-item-group>
-							<!-- <template slot="title">分组一</template> -->
 							<el-menu-item index="/menuManage/menuList" >菜单列表</el-menu-item>
 							<el-menu-item index='/menuManage/addMenu'>新建菜品</el-menu-item>
 						</el-menu-item-group>
 					</el-submenu>
-					
+					<el-submenu index="2">
+						<template slot="title"><i class="el-icon-tickets"></i>分类管理</template>
+						<el-menu-item-group>
+							<el-menu-item index="/classifyManage/classify" >分类列表</el-menu-item>
+							<el-menu-item index='/classifyManage/editClassify'>新建分类</el-menu-item>
+						</el-menu-item-group>
+					</el-submenu>
+					<el-submenu index="3">
+						<template slot="title"><i class="el-icon-s-data"></i>用户点单统计</template>
+						<el-menu-item-group>
+							<el-menu-item index="/" >热销分类</el-menu-item>
+							<el-menu-item index='/'>热销菜品</el-menu-item>
+						</el-menu-item-group>
+					</el-submenu>
 				</el-menu>
 			</el-aside>
 			

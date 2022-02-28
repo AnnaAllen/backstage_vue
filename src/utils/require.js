@@ -20,7 +20,7 @@ instance.interceptors.request.use(
       return response.data;
     },
     (err) => {
-      Toast('服务器异常，请稍后再试');
+      this.$tosat('服务器异常,请稍后再试');
       return Promise.reject(err);
     }
   );

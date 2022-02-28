@@ -39,8 +39,8 @@
       >
         <el-option
           v-for="item in options"
-          :key="item.value"
-          :value="item.label"
+          :key="item._id"
+          :value="item.classifyName"
           @blur="noBlank(3)"
           >
         </el-option>
@@ -48,11 +48,24 @@
       <i class="el-icon-setting" style="margin-left: 10px;"></i>
       <span v-show="selectShow" style="color: red; font-size: 14px; padding-left: 10px">{{selectMsg}}</span>
     </div>
-    <div class="meun-price">
+    <div class="meun-price img_box">
+      <span>点击上传图片&nbsp;<span style="color:red">*</span>&nbsp;&nbsp;&nbsp;</span>
+      <el-upload
+        class="avatar-uploader"
+        :action="baseUrl"
+        :show-file-list="false"
+        :on-success="successUpload"
+        >
+        <img v-if="createAMenu.menuImage" :src="createAMenu.menuImage" class="avatar">
+        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+      </el-upload>
+      
+    </div>
+    <!-- <div class="meun-price">
       <span>没有分类？可添加新分类</span>
       <el-input class="new-select" v-model="newSelect" placeholder="请输入分类名"></el-input>
-      <el-button class="add-more" style="margin-left: 20px;" @click="setNewSelect">新建</el-button>
-    </div>
+      <el-button class="add-more" style="margin-left: 20px;" @click="setNewSelect">添加</el-button>
+    </div> -->
     <el-button v-show="$route.query.id" class="add" @click="editMenu">提交编辑</el-button>
     <el-button v-show="!$route.query.id" class="add" @click="createMenu">创建</el-button>
     <el-button class="cancel" @click="cancelInput">取消</el-button>
@@ -61,48 +74,19 @@
 </template>
 
 <script>
-import { setMenuItem, getAMenu, editMenuItem } from './api'
+import { setMenuItem, getAMenu, editMenuItem, getClassify } from './api'
 export default {
   data() {
     return {
-      options: [
-        {
-          value: '选项1',
-          label: '金典菜品',
-          id: '11'
-        }, {
-          value: '选项2',
-          label: '最多推荐',
-          id: '12'
-        }, {
-          value: '选项3',
-          label: '饮料',
-          id: '11',
-        }, {
-          value: '选项4',
-          label: '硬菜',
-          id: '11'
-        }, {
-          value: '选项5',
-          label: '老火靓汤',
-          id: '11'
-        },
-        {
-          value: '选项6',
-          label: '超值双拼',
-          id: '11'
-        },
-        {
-          value: '选项7',
-          label: '蔬菜',
-          id: '11'
-        }
-        ],
+      baseUrl: 'http://localhost:3000/admin/api/uploads',
+      dialogVisible: false,
+      options: [],
       createAMenu: {
         menu: '',
         price: '',
         menuType: '',
         menuTypeId: '',
+        menuImage: ''
       },
       menuTypeId: '',
       newSelect: '',
@@ -112,6 +96,7 @@ export default {
       nameMsg: '不能为空',
       priceMsg: '不能为空',
       selectMsg: '不能为空',
+      disabled: false,
     }
   },
   methods: {
@@ -134,15 +119,17 @@ export default {
     },
     // 获取分类
     async getMenuType() {
-      
+      const res = await getClassify()
+      this.options = res
+      // console.log(res)
     },
     // 获取分类的id
     changeType(item){
       this.noBlank(3)
       let index = this.options.map(item => {
-        return item.label
+        return item.classifyName
       }).indexOf(item)
-      this.createAMenu.menuTypeId = this.options[index].id
+      this.createAMenu.menuTypeId = this.options[index]._id
     },
     // 提交创建的菜单
     async createMenu() {
@@ -152,6 +139,8 @@ export default {
         this.noBlank(2)
       } else if (this.createAMenu.menuType === '') {
         this.noBlank(3)
+      }else if (this.createAMenu.menuType === '') {
+        this.noBlank(4)
       } else {
         const data = await setMenuItem(this.createAMenu)
         this.$message({
@@ -162,6 +151,11 @@ export default {
           name: 'menuList'
         })
       }
+    },
+    // 图片上传成功
+    successUpload(file) {
+      console.log(file)
+      this.createAMenu.menuImage = file.url
     },
     // 判断表单不为空
     noBlank(n) {
@@ -180,6 +174,13 @@ export default {
           this.priceShow = false
         }
       } else if (n === 3) {
+        console.log(this.createAMenu.menuType)
+        if(this.createAMenu.menuType === '') {
+          this.selectShow = true
+        } else {
+          this.selectShow = false
+        }
+      } else if (n === 4) {
         console.log(this.createAMenu.menuType)
         if(this.createAMenu.menuType === '') {
           this.selectShow = true
@@ -206,10 +207,31 @@ export default {
     if(this.$route.query.id) {
       this.getAMenuData()
     }
+    this.getMenuType()
   }
 }
 </script>
 <style scoped lang='less'>
+.img_box{
+  padding-bottom: 20px;
+  margin: auto;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .upload_img{
+    margin: auto;
+    width: 150px;
+    height: 150px;
+    // border: 1px dotted #999999;
+    text-align: center;
+    line-height: 150px;
+  }
+  img{
+    width: 150px;
+    height: 150px;
+  }
+}
 .special{
   border: 1px solid red;
   border-radius: 6px;
