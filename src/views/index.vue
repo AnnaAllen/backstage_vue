@@ -24,6 +24,19 @@
 							<el-menu-item index='/'>热销菜品</el-menu-item>
 						</el-menu-item-group>
 					</el-submenu>
+					<el-submenu index="4">
+						<template slot="title"><i class="el-icon-s-data"></i>订单管理</template>
+						<el-menu-item-group>
+							<el-menu-item index="/" >已完结订单</el-menu-item>
+							<el-menu-item index='/'>伪完成订单</el-menu-item>
+						</el-menu-item-group>
+					</el-submenu>
+					<el-submenu index="4">
+						<template slot="title"><i class="el-icon-s-data"></i>管理员管理</template>
+						<el-menu-item-group>
+							<el-menu-item index="/" >管理员列表</el-menu-item>
+						</el-menu-item-group>
+					</el-submenu>
 				</el-menu>
 			</el-aside>
 			
