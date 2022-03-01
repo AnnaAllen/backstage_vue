@@ -27,6 +27,19 @@
       ></el-input>
       <span v-show="priceShow" style="color: red; font-size: 14px; padding-left: 10px">{{priceMsg}}</span>
     </div>
+    <div class="meun-dec">
+      <span>商品描述</span>
+      <el-input 
+      class="textArea_box"
+      v-model="createAMenu.describe" 
+      placeholder="请输入商品描述" 
+      type="textarea"
+      :autosize="{ minRows: 2, maxRows: 4}"
+      @blur="noBlank(2)"
+      :class="priceShow? 'special' : ''"
+      ></el-input>
+      <span v-show="priceShow" style="color: red; font-size: 14px; padding-left: 10px">{{priceMsg}}</span>
+    </div>
     <div class="meun-price">
       <span>分类</span>
       <span class="require">*</span>
@@ -86,7 +99,8 @@ export default {
         price: '',
         menuType: '',
         menuTypeId: '',
-        menuImage: ''
+        menuImage: '',
+        describe: ''
       },
       menuTypeId: '',
       newSelect: '',
@@ -196,6 +210,8 @@ export default {
         price: '',
         menuType: '',
         menuTypeId: '',
+        menuImage: '',
+        describe: ''
       }
     },
     // 新建分类
@@ -230,6 +246,16 @@ export default {
   img{
     width: 150px;
     height: 150px;
+  }
+}
+.meun-dec{
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .textArea_box{
+    width: 32%;
+    margin-left: 20px;
   }
 }
 .special{

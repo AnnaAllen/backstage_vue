@@ -32,6 +32,13 @@
 			</template>
 		</el-table-column>
 		<el-table-column
+			label="描述"
+			width="180">
+			<template slot-scope="scope">
+				<span style="margin-left: 10px">{{ scope.row.describe?scope.row.describe:'— —' }}</span>
+			</template>
+		</el-table-column>
+		<el-table-column
 			label="图片"
 			width="180">
 			<template slot-scope="scope">

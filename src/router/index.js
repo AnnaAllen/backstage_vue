@@ -35,6 +35,18 @@ const routes = [
         name: 'classify',
         component: resolve => require(['../views/classifyManage/classify.vue'], resolve)
       },
+      // 额外添加列表
+      {
+        path: 'classifyManage/extra',
+        name: 'extra',
+        component: resolve => require(['../views/classifyManage/extra.vue'], resolve)
+      },
+      // 额外添加列表
+      {
+        path: 'classifyManage/addExtra',
+        name: 'addExtra',
+        component: resolve => require(['../views/classifyManage/addExtra.vue'], resolve)
+      },
     ]
   },
   {

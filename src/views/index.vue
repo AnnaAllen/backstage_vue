@@ -15,6 +15,8 @@
 						<el-menu-item-group>
 							<el-menu-item index="/classifyManage/classify" >分类列表</el-menu-item>
 							<el-menu-item index='/classifyManage/editClassify'>新建分类</el-menu-item>
+							<el-menu-item index='/classifyManage/extra'>小料列表</el-menu-item>
+							<el-menu-item index='/classifyManage/addExtra'>新增小料</el-menu-item>
 						</el-menu-item-group>
 					</el-submenu>
 					<el-submenu index="3">
