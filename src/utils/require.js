@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Vue from 'vue'
 
 const instance = axios.create({
     baseURL: '/api',
@@ -7,9 +8,9 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
     (config) => {
-      // const token = sessionStorage.getItem('token') || '';
+      const token = sessionStorage.getItem('token') || '';
     //   const token = '8f9ed1e44fb09c7838aaa2305d981551'
-      // config.headers['X-Auth0-Token'] = token;
+      config.headers['Token'] = token;
       return config;
     },
     (err) => Promise.reject(err)
@@ -20,7 +21,7 @@ instance.interceptors.request.use(
       return response.data;
     },
     (err) => {
-      this.$tosat('服务器异常,请稍后再试');
+      if(err.response.data.message) Vue.prototype.$message.error(err.response.data.message);
       return Promise.reject(err);
     }
   );

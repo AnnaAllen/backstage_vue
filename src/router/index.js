@@ -47,12 +47,24 @@ const routes = [
         name: 'addExtra',
         component: resolve => require(['../views/classifyManage/addExtra.vue'], resolve)
       },
+      // 管理员列表
+      {
+        path: 'manageMember/manageMember',
+        name: 'manageMember',
+        component: resolve => require(['../views/manageMember/manageMember.vue'], resolve)
+      },
+      // 管理员信息
+      {
+        path: 'manageMember/editManage',
+        name: 'editManage',
+        component: resolve => require(['../views/manageMember/editManage.vue'], resolve)
+      },
     ]
   },
   {
-    path: '/test',
-    name: 'Test',
-    component: resolve => require(['../views/test.vue'],resolve) 
+    path: '/register',
+    name: 'register',
+    component: resolve => require(['../views/register.vue'],resolve) 
   },
 ]
 

@@ -1,8 +1,8 @@
 <template>
 	<div class="">
-		<el-container style="border: 1px solid #eee; height: 100vh;">
-			<el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-				<el-menu :default-openeds="['1','2','3']" router>
+		<el-container style="height: 100vh;">
+			<el-aside width="200px" style="background-color: #081f3e">
+				<el-menu :default-openeds="['1']" router :unique-opened="true" :default-active="$route.path">
 					<el-submenu index="1">
 						<template slot="title"><i class="el-icon-message"></i>菜单管理</template>
 						<el-menu-item-group>
@@ -33,21 +33,22 @@
 							<el-menu-item index='/'>伪完成订单</el-menu-item>
 						</el-menu-item-group>
 					</el-submenu>
-					<el-submenu index="4">
+					<el-submenu index="5">
 						<template slot="title"><i class="el-icon-s-data"></i>管理员管理</template>
 						<el-menu-item-group>
-							<el-menu-item index="/" >管理员列表</el-menu-item>
+							<el-menu-item index="/manageMember/manageMember" >管理员列表</el-menu-item>
+							<el-menu-item index="/manageMember/editManage" >管理员信息</el-menu-item>
 						</el-menu-item-group>
 					</el-submenu>
 				</el-menu>
 			</el-aside>
 			
 			<el-container>
-				<el-header style="font-size: 18px; color: white; background: skyblue;">
-					<span>点单管理系统</span>
+				<el-header style="font-size: 18px; color: white; background: #6c8dae;">
+					<span>陈卓越点单管理系统</span>
 				</el-header>
 				
-				<el-main>
+				<el-main style="">
 					<!-- <el-table
 						:data="tableData"
 						style="width: 100%">
