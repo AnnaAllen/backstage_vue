@@ -2,7 +2,7 @@
 	<div class="">
 		<el-container style="height: 100vh;">
 			<el-aside width="200px" style="background-color: #081f3e">
-				<el-menu :default-openeds="['1']" router :unique-opened="true" :default-active="$route.path">
+				<el-menu :default-openeds="[1,2,3,4,5]" router :unique-opened="true" :default-active="$route.path">
 					<el-submenu index="1">
 						<template slot="title"><i class="el-icon-message"></i>菜单管理</template>
 						<el-menu-item-group>
@@ -22,8 +22,8 @@
 					<el-submenu index="3">
 						<template slot="title"><i class="el-icon-s-data"></i>用户点单统计</template>
 						<el-menu-item-group>
-							<el-menu-item index="/" >热销分类</el-menu-item>
-							<el-menu-item index='/'>热销菜品</el-menu-item>
+							<!-- <el-menu-item index="/" >热销分类</el-menu-item> -->
+							<el-menu-item index='/statistics/statistics'>热销菜品</el-menu-item>
 						</el-menu-item-group>
 					</el-submenu>
 					<el-submenu index="4">
@@ -96,14 +96,7 @@
 export default {
 	data() {
 		return {
-			// tableData: [
-			// 	{
-			// 		date: '2016-05-02',
-			// 		name: '可乐',
-			// 		address: '上海市普陀区金沙江路 1518 弄',
-			// 		category: '饮料'
-			// 	}
-			// ]
+			data: ''
 		}
 	},
 	methods: {
@@ -112,8 +105,9 @@ export default {
 		},
 		handleDelete(index, row) {
 			console.log(index, row);
-		}
-	}
+		},
+	},
+
 }
 </script>
 <style scoped lang='less'>

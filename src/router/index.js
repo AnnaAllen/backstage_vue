@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'index',
-    redirect: 'menuManage/menuList',
+    redirect: 'register',
     component: resolve => require(['../views/index.vue'],resolve),
     children: [
       // 菜单列表
@@ -59,6 +59,12 @@ const routes = [
         name: 'editManage',
         component: resolve => require(['../views/manageMember/editManage.vue'], resolve)
       },
+      // 用户点单统计
+      {
+        path: 'statistics/statistics',
+        name: 'statistics',
+        component: resolve => require(['../views/statistics/statistics.vue'], resolve)
+      }
     ]
   },
   {

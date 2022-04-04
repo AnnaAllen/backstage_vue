@@ -98,13 +98,21 @@ export default {
 		},
 		// 获取列表数据
 		async getListData() {
-			const data = await getMenuList()
-			// 简单处理时间戳
-			data.forEach(item => {
-				item.createTime = item.createTime.substr(0, 10)
-			})
-			// console.log(data)
-			this.tableData = data
+			try {
+				const data = await getMenuList()
+				// 简单处理时间戳
+				data.forEach(item => {
+					item.createTime = item.createTime.substr(0, 10)
+				})
+				// console.log(data)
+				this.tableData = data
+			} catch(err) {
+				console.log(err)
+				this.$message({
+					message: '请登录系统后再进行操作',
+					type: 'error'
+				});
+			}
 		}
 	},
 	created() {

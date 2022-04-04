@@ -32,7 +32,12 @@
               </div>
               <div class="userName">
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;邮箱:</span><span>*</span>
-                <el-input class="input" v-model="login.userEmail" placeholder="请输入内容"></el-input>
+                <el-input 
+                class="input" 
+                v-model="login.userEmail" 
+                placeholder="请输入内容"
+                @blur="emailRule"
+                ></el-input>
               </div>
               <div style="text-align:center;">
                 <el-button class="register_but" @click="adminLogin(1)">注册</el-button>
@@ -81,14 +86,26 @@ export default {
         return
       }
       const res = n == 1 ? await userLogin(this.login) : await userRegister(this.userReg)
-      let msg = n == 1 ? '注册成功' : '登录成功'
-      this.$message.success(msg)
+      if(n == 1) {
+        this.$message.success('注册成功，请重新登录')
+        this.tabName = register
+        return
+      }
+      this.$message.success('登录成功')
       res.token && sessionStorage.setItem('token', res.token)
       // console.log(res)
       this.$router.push({
         name: 'menuList'
       })
     },
+    // 失去焦点后邮箱校验
+    emailRule() {
+      let n = this.login.userEmail.match(/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/)
+      if(!n) {
+        this.$message.error('邮箱格式错误，请检查')
+        return
+      }
+    }
 	},
   created() {
     // this.noNull()
