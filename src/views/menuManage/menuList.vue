@@ -2,7 +2,13 @@
 <div>
   <el-table
 		:data="tableData"
-		style="width: 100%">
+		max-height="550"
+		style="width: 100%"
+		>
+		<!-- <el-table-column
+      type="selection"
+      width="55">
+		</el-table-column> -->
 		<el-table-column
 			label="创建日期"
 			width="180">
@@ -18,8 +24,21 @@
 			</template>
 		</el-table-column>
 		<el-table-column
-			label="所属类别"
+			label="今日推荐"
 			width="180">
+			<template slot-scope="scope">
+				<span style="margin-left: 10px">{{ scope.row.isHot }}</span>
+			</template>
+		</el-table-column>
+		<el-table-column
+			label="所属类别"
+			:filters="tableClassify"
+      :filter-method="filterTag"
+			width="180">
+			 <!-- <template slot-scope="scope">
+        <el-tag
+          disable-transitions>{{scope.row.menuType}}</el-tag>
+      </template> -->
 			<template slot-scope="scope">
 				<span style="margin-left: 10px">{{ scope.row.menuType }}</span>
 			</template>
@@ -45,7 +64,7 @@
 				<img style="width:50px;height:50px;" v-imgUrl="scope.row.menuImage" alt="">
 			</template>
 		</el-table-column>
-		<el-table-column label="操作">
+		<el-table-column label="操作" fixed="right" width="200">
 			<template slot-scope="scope">
 				<el-button
 					size="mini"
@@ -61,14 +80,22 @@
 </template>
 
 <script>
-import { getMenuList, deleteMenu } from './api'
+import { getMenuList, deleteMenu, getClassify } from './api'
 export default {
 	data() {
 		return {
-			tableData: []
+			tableData: [],
+			tableClassify: []
 		}
 	},
 	methods: {
+		filterTag(value, row) {
+			// console.log(row)
+			return row.menuType === value;
+		},
+		handleSelectionChange(val) {
+			console.log(val);
+		},
 		// 编辑菜单
 		handleEdit(index, row) {
 			let id = row._id
@@ -113,10 +140,23 @@ export default {
 					type: 'error'
 				});
 			}
+		},
+		// 获取全部分类
+		async getAllClassify() {
+			try{
+				const res = await getClassify()
+				this.tableClassify = res.map(item => {
+					return {text: item.classifyName, value:item.classifyName}
+				})
+				console.log(this.tableClassify)
+			} catch(err) {
+
+			}
 		}
 	},
 	created() {
 		this.getListData()
+		this.getAllClassify()
 	}
 }
 </script>

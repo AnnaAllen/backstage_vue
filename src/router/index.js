@@ -64,6 +64,18 @@ const routes = [
         path: 'statistics/statistics',
         name: 'statistics',
         component: resolve => require(['../views/statistics/statistics.vue'], resolve)
+      },
+      // 首页方案
+      {
+        path: 'weAppIndex/index',
+        name: 'weAppIndex',
+        component: resolve => require(['../views/weAppIndex/index.vue'], resolve) 
+      },
+      // 处理订单
+      {
+        path: 'order/index',
+        name: 'order',
+        component: resolve => require(['../views/order/index.vue'], resolve) 
       }
     ]
   },
@@ -72,6 +84,11 @@ const routes = [
     name: 'register',
     component: resolve => require(['../views/register.vue'],resolve) 
   },
+  {
+    path: '/test',
+    name: 'test',
+    component: resolve => require(['../views/test.vue'], resolve)
+  }
 ]
 
 const router = new VueRouter({

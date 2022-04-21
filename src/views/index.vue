@@ -1,8 +1,15 @@
 <template>
-	<div class="">
+	<div class="index">
 		<el-container style="height: 100vh;">
 			<el-aside width="200px" style="background-color: #081f3e">
 				<el-menu :default-openeds="[1,2,3,4,5]" router :unique-opened="true" :default-active="$route.path">
+					<el-submenu index="6">
+						<template slot="title"><i class="el-icon-message"></i>首页管理</template>
+						<el-menu-item-group>
+							<el-menu-item index="/weAppIndex/index" >首页</el-menu-item>
+							<!-- <el-menu-item index='/menuManage/addMenu'>新建菜品</el-menu-item> -->
+						</el-menu-item-group>
+					</el-submenu>
 					<el-submenu index="1">
 						<template slot="title"><i class="el-icon-message"></i>菜单管理</template>
 						<el-menu-item-group>
@@ -29,8 +36,8 @@
 					<el-submenu index="4">
 						<template slot="title"><i class="el-icon-s-data"></i>订单管理</template>
 						<el-menu-item-group>
-							<el-menu-item index="/" >已完结订单</el-menu-item>
-							<el-menu-item index='/'>伪完成订单</el-menu-item>
+							<el-menu-item index="/order/index" >处理订单</el-menu-item>
+							<!-- <el-menu-item index='/'>伪完成订单</el-menu-item> -->
 						</el-menu-item-group>
 					</el-submenu>
 					<el-submenu index="5">
@@ -42,50 +49,20 @@
 					</el-submenu>
 				</el-menu>
 			</el-aside>
-			
 			<el-container>
 				<el-header style="font-size: 18px; color: white; background: #6c8dae;">
-					<span>陈卓越点单管理系统</span>
+					<div class="title">通用点单系统</div>
+					<div class="user"></div>
 				</el-header>
-				
-				<el-main style="">
-					<!-- <el-table
-						:data="tableData"
-						style="width: 100%">
-						<el-table-column
-							label="提交日期"
-							width="180">
-							<template slot-scope="scope">
-								<span style="margin-left: 10px">{{ scope.row.date }}</span>
-							</template>
-						</el-table-column>
-						<el-table-column
-							label="菜名"
-							width="180">
-							<template slot-scope="scope">
-								<span style="margin-left: 10px">{{ scope.row.name }}</span>
-							</template>
-						</el-table-column>
-						<el-table-column
-							label="所属类别"
-							width="180">
-							<template slot-scope="scope">
-								<span style="margin-left: 10px">{{ scope.row.category }}</span>
-							</template>
-						</el-table-column>
-						<el-table-column label="操作">
-							<template slot-scope="scope">
-								<el-button
-									size="mini"
-									@click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-								<el-button
-									size="mini"
-									type="danger"
-									@click="handleDelete(scope.$index, scope.row)">删除</el-button>
-							</template>
-						</el-table-column>
-					</el-table> -->
-					<router-view></router-view>
+				<el-main>
+					<div class="inside-box">
+						<router-view></router-view>
+					</div>
+					<!-- <el-tabs type="border-card">
+						<el-tab-pane>
+							<span slot="label"><i class="el-icon-date"></i> 我的行程</span>
+						</el-tab-pane>
+					</el-tabs> -->
 				</el-main>
 			</el-container>
 		</el-container>
@@ -111,13 +88,27 @@ export default {
 }
 </script>
 <style scoped lang='less'>
-	
+	.index {
+		background: #e8e8e8;
+		.inside-box{
+			background-color: white;
+			box-sizing: border-box;
+			height: 600px;
+			// line-height: 90vh;
+			width: 85vw;
+			border-radius: 5px;
+			padding: 20px;
+			margin: 20px auto;
+		}
+	}
 	.el-header {
     background-color: #B3C0D1;
     color: #333;
     line-height: 60px;
   }
-  
+  .el-main {
+		padding: 0;
+	}
   .el-aside {
     color: #333;
   }

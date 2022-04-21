@@ -67,15 +67,12 @@ export default {
         userName: '',
         password: ''
       }
-      // console.log(111)
       for(let i in noNull) {
         if(!(!!classifyFrom[i])) {
-          // console.log(i,!!classifyFrom[i])
           return false
         }
       }
       return true
-      // console.log(this.classifyFrom)
     },
     restore() {
       this.$router.go(-1)
@@ -84,12 +81,10 @@ export default {
     async getAdminMsg() {
       const res = await getAAdmin(this.id)
       this.classifyFrom = res.model
-      // this.classifyFrom.password = ''
       console.log(res)
     },
     // 修改管理员信息
     async addClassify() {
-      // console.log(this.check())
       if(!this.check()) {
         this.$message.error('请填写完整表单')
         return

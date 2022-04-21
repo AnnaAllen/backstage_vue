@@ -39,6 +39,7 @@
 				<el-button
 					size="mini"
 					type="danger"
+					v-if="scope.row.userName === 'admin' ? false : true"
 					@click="handleDelete(scope.$index, scope.row)">删除</el-button>
 			</template>
 		</el-table-column>

@@ -58,7 +58,7 @@
           >
         </el-option>
       </el-select>
-      <i class="el-icon-setting" style="margin-left: 10px;"></i>
+      <!-- <i class="el-icon-setting" style="margin-left: 10px;"></i> -->
       <span v-show="selectShow" style="color: red; font-size: 14px; padding-left: 10px">{{selectMsg}}</span>
     </div>
     <div class="meun-price img_box">
